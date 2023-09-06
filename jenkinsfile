@@ -11,7 +11,7 @@ echo hello chaitanya
 stage(pulling){
 steps{
 sh """
-docker login -u Chaitanya305 -p $PASS
+docker login -u chaitanya305 -p $PASS
 docker pull chaitanya305/maven-app:$BUILD_TAG
 """
 }
