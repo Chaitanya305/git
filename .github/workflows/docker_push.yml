@@ -24,7 +24,7 @@ jobs:
         run: docker build . -t chaitanya305/base-image:${{ github.run_number }}
   
       - name: Logging to DockerHub
-        run: docker login -u {{ secrets.DOCKER_HUB_USERNAME }} -p {{ secrets.DOCKER_HUB_PASS }}
+        run: echo ${{ secrets.DOCKER_HUB_PASS }} | docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} --password-stdin
     
       - name: Puhsing Image
         run: docker push chaitanya305/base-image:${{ github.run_number }}
