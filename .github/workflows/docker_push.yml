@@ -1,0 +1,30 @@
+name: Workflow to push docker image to docker hub
+
+on:
+  push:
+    branches: [ "master" ]
+    paths:
+      - "Dockerfile"
+  pull_request:
+    branches: [ "master" ]
+    types:
+      - closed
+    paths:
+      - "Dockerfile"
+
+jobs:
+  docker_push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2 
+    
+      - name: Building Image
+        run: docker build . -t chaitanya305/base-image:${{ github.run_number }}
+  
+      - name: Logging to DockerHub
+        run: docker login -u {{ secrets.DOCKER_HUB_USERNAME }} -p {{ secrets.DOCKER_HUB_PASS }}
+    
+      - name: Puhsing Image
+        run: docker push chaitanya305/base-image:${{ github.run_number }}
