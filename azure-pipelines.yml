@@ -6,8 +6,7 @@
 trigger:
 - master
 
-pool:
-  vmImage: my-pool
+pool: my-pool
 
 steps:
 - script: echo Hello, world!
